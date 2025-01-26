@@ -28,6 +28,15 @@
 
 ## Project setup
 
+### Run with Docker
+
+```bash
+$ docker compose up --build
+```
+
+Note: After the initial build, simply use the -d flag for subsequent starts, without the "--build" parameter.
+
+
 ```bash
 $ pnpm install
 ```
