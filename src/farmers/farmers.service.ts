@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { Farmer } from './farmer.model';
+import { Farmer } from './farmer.entity';
 
 @Injectable()
 export class FarmersService {
