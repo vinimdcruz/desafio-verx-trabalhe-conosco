@@ -4,23 +4,28 @@ import {
   Model,
   PrimaryKey,
   AutoIncrement,
-  HasMany,
+  ForeignKey,
+  BelongsTo,
 } from 'sequelize-typescript';
 import { Farm } from '../farms/farm.entity';
 
-@Table({ tableName: 'farmers' })
-export class Farmer extends Model {
+@Table({ tableName: 'crops' })
+export class Crop extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column
   id: number;
 
-  @Column({ allowNull: false, unique: true })
-  cpfOrCnpj: string;
-
   @Column({ allowNull: false })
   name: string;
 
-  @HasMany(() => Farm)
-  farms: Farm[];
+  @Column({ allowNull: false })
+  harvestYear: number;
+
+  @ForeignKey(() => Farm)
+  @Column
+  farmId: number;
+
+  @BelongsTo(() => Farm)
+  farm: Farm;
 }

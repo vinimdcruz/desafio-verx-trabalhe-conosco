@@ -1,24 +1,45 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { Farmer } from './farmer.entity';
 
 @Injectable()
 export class FarmersService {
-  constructor(@InjectModel(Farmer) private farmerModel: typeof Farmer) {}
+  constructor(
+    @InjectModel(Farmer)
+    private readonly farmerModel: typeof Farmer,
+  ) {}
 
-  async create(farmer: Farmer) {
-    return this.farmerModel.create(farmer);
-  }
-
-  async findAll() {
+  async findAll(): Promise<Farmer[]> {
     return this.farmerModel.findAll();
   }
 
-  async update(id: number, data: Partial<Farmer>) {
-    await this.farmerModel.update(data, { where: { id } });
-    return this.farmerModel.findByPk(id);
+  async findOne(id: number): Promise<Farmer> {
+    const farmer = await this.farmerModel.findOne({ where: { id } });
+    if (!farmer) {
+      throw new NotFoundException('Farmer not found');
+    }
+    return farmer;
   }
 
-  async delete(id: number) {
-    return this.farmerModel.destroy({ where: { id } });
+  async create(farmer: Partial<Farmer>): Promise<Farmer> {
+    return this.farmerModel.create(farmer);
+  }
+
+  async update(id: number, farmer: Partial<Farmer>): Promise<number[]> {
+    const [updatedRows] = await this.farmerModel.update(farmer, {
+      where: { id },
+    });
+    if (!updatedRows) {
+      throw new NotFoundException('Farmer not found');
+    }
+    return [updatedRows];
+  }
+
+  async delete(id: number): Promise<boolean> {
+    const deleted = await this.farmerModel.destroy({ where: { id } });
+    if (!deleted) {
+      throw new NotFoundException('Farmer not found');
+    }
+    return true;
   }
 }

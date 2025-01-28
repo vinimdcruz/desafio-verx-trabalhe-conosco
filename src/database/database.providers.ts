@@ -1,5 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import { Farmer } from '../farmers/farmer.entity';
+import { Farm } from 'src/farms/farm.entity';
+import { Crop } from 'src/crops/crop.entity';
 
 export const databaseProviders = [
   {
@@ -13,7 +15,7 @@ export const databaseProviders = [
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
       });
-      sequelize.addModels([Farmer]);
+      sequelize.addModels([Farmer, Farm, Crop]);
       await sequelize.sync();
       return sequelize;
     },
