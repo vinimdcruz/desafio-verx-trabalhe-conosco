@@ -1,31 +1,17 @@
-import {
-  Table,
-  Column,
-  Model,
-  PrimaryKey,
-  AutoIncrement,
-  ForeignKey,
-  BelongsTo,
-} from 'sequelize-typescript';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Farm } from '../farms/farm.entity';
 
-@Table({ tableName: 'crops' })
-export class Crop extends Model {
-  @PrimaryKey
-  @AutoIncrement
-  @Column
+@Entity({ name: 'crops' })
+export class Crop {
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ allowNull: false })
+  @Column({ nullable: false })
   name: string;
 
-  @Column({ allowNull: false })
+  @Column({ nullable: false })
   harvestYear: number;
 
-  @ForeignKey(() => Farm)
-  @Column
-  farmId: number;
-
-  @BelongsTo(() => Farm)
+  @ManyToOne(() => Farm, (farm) => farm.crops)
   farm: Farm;
 }

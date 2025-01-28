@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
-import { FarmersController } from './farmers.controller'; //ToDo: Finish this logic
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { FarmersController } from './farmers.controller';
 import { FarmersService } from './farmers.service';
-import { DatabaseModule } from '../database/database.module';
-import { SequelizeModule } from '@nestjs/sequelize';
 import { Farmer } from './farmer.entity';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Farmer])],
+  imports: [TypeOrmModule.forFeature([Farmer])],
   controllers: [FarmersController],
   providers: [FarmersService],
   exports: [FarmersService],

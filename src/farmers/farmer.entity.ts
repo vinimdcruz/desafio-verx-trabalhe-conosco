@@ -1,26 +1,17 @@
-import {
-  Table,
-  Column,
-  Model,
-  PrimaryKey,
-  AutoIncrement,
-  HasMany,
-} from 'sequelize-typescript';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Farm } from '../farms/farm.entity';
 
-@Table({ tableName: 'farmers' })
-export class Farmer extends Model {
-  @PrimaryKey
-  @AutoIncrement
-  @Column
+@Entity({ name: 'farmers' })
+export class Farmer {
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ allowNull: false, unique: true })
+  @Column({ unique: true })
   cpfOrCnpj: string;
 
-  @Column({ allowNull: false })
+  @Column()
   name: string;
 
-  @HasMany(() => Farm)
+  @OneToMany(() => Farm, (farm) => farm.farmer)
   farms: Farm[];
 }

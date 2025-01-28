@@ -1,48 +1,39 @@
 import {
-  Table,
+  Entity,
+  PrimaryGeneratedColumn,
   Column,
-  Model,
-  PrimaryKey,
-  AutoIncrement,
-  HasMany,
-  ForeignKey,
-  BelongsTo,
-} from 'sequelize-typescript';
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { Crop } from 'src/crops/crop.entity';
 import { Farmer } from 'src/farmers/farmer.entity';
 
-@Table({ tableName: 'farms' })
-export class Farm extends Model {
-  @PrimaryKey
-  @AutoIncrement
-  @Column
+@Entity({ name: 'farms' })
+export class Farm {
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ allowNull: false })
+  @Column({ nullable: false })
   name: string;
 
-  @Column({ allowNull: false })
+  @Column({ nullable: false })
   city: string;
 
-  @Column({ allowNull: false })
+  @Column({ nullable: false })
   state: string;
 
-  @Column({ allowNull: false })
+  @Column({ nullable: false })
   totalArea: number;
 
-  @Column({ allowNull: false })
+  @Column({ nullable: false })
   agriculturalArea: number;
 
-  @Column({ allowNull: false })
+  @Column({ nullable: false })
   vegetationArea: number;
 
-  @HasMany(() => Crop)
+  @OneToMany(() => Crop, (crop) => crop.farm)
   crops: Crop[];
 
-  @ForeignKey(() => Farmer)
-  @Column
-  farmerId: number;
-
-  @BelongsTo(() => Farmer)
+  @ManyToOne(() => Farmer, (farmer) => farmer.farms)
   farmer: Farmer;
 }
