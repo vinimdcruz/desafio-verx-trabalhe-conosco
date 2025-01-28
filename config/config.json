@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "user",
+    "password": "password",
+    "database": "farmers_db",
+    "host": "postgres_db",
+    "dialect": "postgres"
+  }
+}
