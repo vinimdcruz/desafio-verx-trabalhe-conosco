@@ -6,7 +6,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { CreateFarmDTO } from '../farms/create-farm-dto';
+import { CreateFarmDTO } from '../../farms/create-farm-dto';
 
 export class CreateFarmerDto {
   @IsString()
