@@ -7,7 +7,7 @@ Projeto de desafio técnico
 - NestJS
 - Docker
 - Postgres
-- Sequelize
+- TypeORM
 - Jest
 - Swagger
 

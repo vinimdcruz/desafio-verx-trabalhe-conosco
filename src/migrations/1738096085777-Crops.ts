@@ -8,10 +8,10 @@ export class Crops1738096085777 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'uuid',
+            type: 'int',
             isPrimary: true,
             isGenerated: true,
-            generationStrategy: 'uuid',
+            generationStrategy: 'increment',
           },
           {
             name: 'name',
@@ -21,7 +21,7 @@ export class Crops1738096085777 implements MigrationInterface {
           },
           {
             name: 'farm_id',
-            type: 'uuid',
+            type: 'int',
             isNullable: false,
           },
           {

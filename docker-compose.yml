@@ -10,8 +10,7 @@ services:
       - .env
     volumes:
       - .:/app
-      - /app/node_modules
-    command: sh -c "pnpm run db:migrate && pnpm run start:prod"
+    command: sh -c "pnpm install && pnpm build && pnpm run db:migrate && pnpm run start:prod"
     networks:
       - desafio-verx-network
 

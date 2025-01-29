@@ -8,10 +8,10 @@ export class Farmers1738095852892 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'uuid',
+            type: 'int',
             isPrimary: true,
             isGenerated: true,
-            generationStrategy: 'uuid',
+            generationStrategy: 'increment',
           },
           {
             name: 'cpf_cnpj',
