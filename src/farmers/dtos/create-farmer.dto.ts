@@ -6,7 +6,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { CreateFarmDTO } from '../../farms/create-farm-dto';
+import { CreateFarmDto } from '../../farms/dtos/create-farm-dto';
 
 export class CreateFarmerDto {
   @IsString()
@@ -21,6 +21,6 @@ export class CreateFarmerDto {
 
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => CreateFarmDTO)
-  farms: CreateFarmDTO[];
+  @Type(() => CreateFarmDto)
+  farms: CreateFarmDto[];
 }

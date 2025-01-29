@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { FarmersModule } from './farmers/farmers.module';
+import { FarmsModule } from './farms/farm.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { FarmersModule } from './farmers/farmers.module';
       subscribers: [],
     }),
     FarmersModule,
+    FarmsModule,
   ],
   controllers: [],
   providers: [],

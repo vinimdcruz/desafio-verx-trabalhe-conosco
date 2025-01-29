@@ -1,4 +1,4 @@
-import { CreateCropDto } from '../crops/crop.create-dto';
+import { CreateCropDto } from '../../crops/dtos/crop.create-dto';
 import {
   IsString,
   IsNotEmpty,
@@ -8,7 +8,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
-export class CreateFarmDTO {
+export class CreateFarmDto {
   @IsString()
   @IsNotEmpty()
   name: string;
