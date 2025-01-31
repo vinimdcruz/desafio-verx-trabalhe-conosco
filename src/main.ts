@@ -9,7 +9,9 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Brain Agriculture API')
-    .setDescription('Here is the API for the Brain Agriculture project')
+    .setDescription(
+      'Here is the API Docs for the Brain Agriculture project. Below you can find the endpoints and the request/response schemas.',
+    )
     .setVersion('1.0')
     .addTag('brainagriculture')
     .build();

@@ -1,14 +1,4 @@
-import { IsString, IsOptional, Matches } from 'class-validator';
+import { PartialType } from '@nestjs/swagger';
+import { CreateFarmerDto } from './create-farmer.dto';
 
-export class UpdateFarmerDto {
-  @IsString()
-  @IsOptional()
-  name?: string;
-
-  @IsString()
-  @IsOptional()
-  @Matches(/^\d{11}$|^\d{14}$/, {
-    message: 'CPF or CNPJ deve possuir 11 ou 14 dígitos',
-  })
-  cpfOrCnpj?: string;
-}
+export class UpdateFarmerDto extends PartialType(CreateFarmerDto) {}

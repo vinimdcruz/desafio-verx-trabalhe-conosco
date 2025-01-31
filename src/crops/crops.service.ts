@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Crop } from './crop.entity';
 import { Farm } from '../farms/farm.entity';
-import { CreateCropDto } from './dtos/crop.create-dto';
+import { CreateCropDto } from './dtos/create-crop.dto';
 import { UpdateCropDto } from './dtos/update-crop.dto';
 
 @Injectable()

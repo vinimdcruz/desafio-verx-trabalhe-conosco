@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Farm } from './farm.entity';
 import { Farmer } from '../farmers/farmer.entity';
-import { CreateFarmDto } from './dtos/create-farm-dto';
+import { CreateFarmDto } from './dtos/create-farm.dto';
 import { UpdateFarmDto } from './dtos/update-farm.dto';
 
 @Injectable()

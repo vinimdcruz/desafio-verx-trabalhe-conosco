@@ -8,7 +8,7 @@ import {
   Param,
 } from '@nestjs/common';
 
-import { CreateFarmDto } from './dtos/create-farm-dto';
+import { CreateFarmDto } from './dtos/create-farm.dto';
 import { FarmsService } from './farms.service';
 import { Farm } from './farm.entity';
 import { UpdateFarmDto } from './dtos/update-farm.dto';
