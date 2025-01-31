@@ -5,35 +5,35 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { Crop } from 'src/crops/crop.entity';
-import { Farmer } from 'src/farmers/farmer.entity';
+import { Farmer } from '../farmers/farmer.entity';
+import { Crop } from '../crops/crop.entity';
 
 @Entity({ name: 'farms' })
 export class Farm {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: false })
+  @Column()
   name: string;
 
-  @Column({ nullable: false })
+  @Column()
   city: string;
 
-  @Column({ nullable: false })
+  @Column()
   state: string;
 
-  @Column({ nullable: false })
+  @Column()
   totalArea: number;
 
-  @Column({ nullable: false })
+  @Column()
   agriculturalArea: number;
 
-  @Column({ nullable: false })
+  @Column()
   vegetationArea: number;
 
-  @OneToMany(() => Crop, (crop) => crop.farm)
-  crops: Crop[];
-
-  @ManyToOne(() => Farmer, (farmer) => farmer.farms)
+  @ManyToOne(() => Farmer, (farmer) => farmer.farms, { onDelete: 'CASCADE' })
   farmer: Farmer;
+
+  @OneToMany(() => Crop, (crop) => crop.farm, { cascade: true })
+  crops: Crop[];
 }

@@ -13,7 +13,8 @@ import { getDatabaseConfig } from './config/database.config';
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => getDatabaseConfig(configService),
+      useFactory: (configService: ConfigService) =>
+        getDatabaseConfig(configService),
       inject: [ConfigService],
     }),
     FarmersModule,
@@ -21,4 +22,4 @@ import { getDatabaseConfig } from './config/database.config';
     CropsModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}

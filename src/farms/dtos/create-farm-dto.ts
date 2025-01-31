@@ -1,12 +1,4 @@
-import { CreateCropDto } from '../../crops/dtos/crop.create-dto';
-import {
-  IsString,
-  IsNotEmpty,
-  IsNumber,
-  IsArray,
-  ValidateNested,
-} from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateFarmDto {
   @IsString()
@@ -33,8 +25,7 @@ export class CreateFarmDto {
   @IsNotEmpty()
   vegetationArea: number;
 
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateCropDto)
-  crops: CreateCropDto[];
+  @IsNumber()
+  @IsNotEmpty()
+  farmerId: number;
 }

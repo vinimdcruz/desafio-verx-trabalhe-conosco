@@ -10,18 +10,19 @@ import {
 
 import { CreateCropDto } from './dtos/crop.create-dto';
 import { CropsService } from './crops.service';
-import { Crop } from './crop.entity';
 import { UpdateCropDto } from './dtos/update-crop.dto';
+import { Crop } from './crop.entity';
 
-@Controller('crops')
+@Controller('farms/:farmId/crops')
 export class CropsController {
   constructor(private readonly cropsService: CropsService) {}
 
   @Post()
-  create(@Body() createCropDto: CreateCropDto): Promise<Crop> {
-    const crop = new Crop();
-    Object.assign(crop, createCropDto);
-    return this.cropsService.create(crop);
+  create(
+    @Param('farmId') farmId: number,
+    @Body() createCropDto: CreateCropDto,
+  ): Promise<Crop> {
+    return this.cropsService.create(farmId, createCropDto);
   }
 
   @Get()
@@ -29,11 +30,16 @@ export class CropsController {
     return this.cropsService.findAll();
   }
 
+  @Get('/farms/:farmId/crops')
+  getCropsByFarm(@Param('farmId') farmId: number) {
+    return this.cropsService.findOne(farmId);
+  }
+
   @Put(':id')
   update(
     @Param('id') id: number,
     @Body() updateCropDto: UpdateCropDto,
-  ): Promise<void> {
+  ): Promise<Crop> {
     return this.cropsService.update(id, updateCropDto);
   }
 

@@ -18,9 +18,7 @@ export class FarmersController {
 
   @Post()
   create(@Body() createFarmerDto: CreateFarmerDto): Promise<Farmer> {
-    const farmer = new Farmer();
-    Object.assign(farmer, createFarmerDto);
-    return this.farmersService.create(farmer);
+    return this.farmersService.create(createFarmerDto);
   }
 
   @Get()

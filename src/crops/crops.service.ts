@@ -2,12 +2,15 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Crop } from './crop.entity';
+import { Farm } from '../farms/farm.entity';
+import { CreateCropDto } from './dtos/crop.create-dto';
+import { UpdateCropDto } from './dtos/update-crop.dto';
 
 @Injectable()
 export class CropsService {
   constructor(
-    @InjectRepository(Crop)
-    private readonly cropRepository: Repository<Crop>,
+    @InjectRepository(Crop) private cropRepository: Repository<Crop>,
+    @InjectRepository(Farm) private farmRepository: Repository<Farm>,
   ) {}
 
   async findAll(): Promise<Crop[]> {
@@ -22,16 +25,21 @@ export class CropsService {
     return crop;
   }
 
-  async create(crop: Partial<Crop>): Promise<Crop> {
-    const newCrop = this.cropRepository.create(crop);
-    return this.cropRepository.save(newCrop);
+  async create(farmId: number, createCropDto: CreateCropDto): Promise<Crop> {
+    const farm = await this.farmRepository.findOne({ where: { id: farmId } });
+    if (!farm) throw new NotFoundException('Farm not found');
+
+    const crop = this.cropRepository.create({ ...createCropDto, farm });
+    return this.cropRepository.save(crop);
   }
 
-  async update(id: number, crop: Partial<Crop>): Promise<void> {
-    const result = await this.cropRepository.update(id, crop);
-    if (result.affected === 0) {
+  async update(id: number, updateCropDto: UpdateCropDto): Promise<Crop> {
+    const crop = await this.findOne(id);
+    if (!crop) {
       throw new NotFoundException('Crop not found');
     }
+    Object.assign(crop, updateCropDto);
+    return this.cropRepository.save(crop);
   }
 
   async delete(id: number): Promise<void> {

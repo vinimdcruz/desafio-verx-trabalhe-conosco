@@ -8,4 +8,8 @@ export class CreateCropDto {
   @IsNumber()
   @IsNotEmpty()
   harvestYear: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  farmId: number;
 }

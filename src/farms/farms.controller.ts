@@ -12,17 +12,17 @@ import { CreateFarmDto } from './dtos/create-farm-dto';
 import { FarmsService } from './farms.service';
 import { Farm } from './farm.entity';
 import { UpdateFarmDto } from './dtos/update-farm.dto';
-import { Crop } from 'src/crops/crop.entity';
 
 @Controller('farms')
 export class FarmsController {
   constructor(private readonly farmsService: FarmsService) {}
 
-  @Post()
-  create(@Body() createFarmDto: CreateFarmDto): Promise<Farm> {
-    const farm = new Farm();
-    Object.assign(farm, createFarmDto);
-    return this.farmsService.create(farm);
+  @Post('/farmers/:farmerId/farms')
+  create(
+    @Param('farmerId') farmerId: number,
+    @Body() createFarmDto: CreateFarmDto,
+  ): Promise<Farm> {
+    return this.farmsService.create(farmerId, createFarmDto);
   }
 
   @Get()
@@ -30,20 +30,17 @@ export class FarmsController {
     return this.farmsService.findAll();
   }
 
+  @Get('/farmers/:farmerId/farms')
+  getFarmsByFarmer(@Param('farmerId') farmerId: number) {
+    return this.farmsService.findOne(farmerId);
+  }
+
   @Put(':id')
   update(
     @Param('id') id: number,
     @Body() updateFarmDto: UpdateFarmDto,
-  ): Promise<void> {
-    const farmToUpdate = {
-      ...updateFarmDto,
-      crops: updateFarmDto.crops?.map((cropDto) => {
-        const crop = new Crop();
-        Object.assign(crop, cropDto);
-        return crop;
-      }),
-    };
-    return this.farmsService.update(id, farmToUpdate);
+  ): Promise<Farm> {
+    return this.farmsService.update(id, updateFarmDto);
   }
 
   @Delete(':id')
