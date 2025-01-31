@@ -1,4 +1,5 @@
-import { IsString, IsNotEmpty, Matches } from 'class-validator';
+import { IsString, IsNotEmpty, Validate } from 'class-validator';
+import { CpfCnpjValidator } from '../../validators/cpf-cnpj.validator';
 
 export class CreateFarmerDto {
   @IsString()
@@ -7,8 +8,6 @@ export class CreateFarmerDto {
 
   @IsString()
   @IsNotEmpty()
-  @Matches(/^\d{11}$|^\d{14}$/, {
-    message: 'CPF or CNPJ deve possuir 11 ou 14 dígitos',
-  })
+  @Validate(CpfCnpjValidator, { message: 'CPF ou CNPJ inválido' })
   cpfOrCnpj: string;
 }
