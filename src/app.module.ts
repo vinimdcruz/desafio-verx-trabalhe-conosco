@@ -1,29 +1,24 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { FarmersModule } from './farmers/farmers.module';
 import { FarmsModule } from './farms/farm.module';
 import { CropsModule } from './crops/crop.module';
+import { getDatabaseConfig } from './config/database.config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST,
-      port: Number(process.env.DB_PORT),
-      username: process.env.DB_USER,
-      password: String(process.env.DB_PASSWORD),
-      database: process.env.DB_NAME,
-      synchronize: true,
-      logging: true,
-      entities: [__dirname + '/../**/*.entity.js'],
-      migrations: [__dirname + '/../migrations/**/*.js'],
-      subscribers: [],
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => getDatabaseConfig(configService),
+      inject: [ConfigService],
     }),
     FarmersModule,
     FarmsModule,
     CropsModule,
   ],
-  controllers: [],
-  providers: [],
 })
-export class AppModule {}
+export class AppModule { }
