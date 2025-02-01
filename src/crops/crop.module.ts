@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Crop } from './crop.entity';
 import { CropsController } from './crops.controller';
 import { CropsService } from './crops.service';
-import { Farm } from 'src/farms/farm.entity';
+import { Farm } from '../farms/farm.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Crop, Farm])],

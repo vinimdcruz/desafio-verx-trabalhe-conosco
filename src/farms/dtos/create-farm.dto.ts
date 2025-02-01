@@ -24,8 +24,4 @@ export class CreateFarmDto {
   @IsNumber()
   @IsNotEmpty()
   vegetationArea: number;
-
-  @IsNumber()
-  @IsNotEmpty()
-  farmerId: number;
 }

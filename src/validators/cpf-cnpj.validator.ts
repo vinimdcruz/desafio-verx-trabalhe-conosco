@@ -15,3 +15,7 @@ export class CpfCnpjValidator implements ValidatorConstraintInterface {
     return 'CPF ou CNPJ inválido';
   }
 }
+
+export function generateValidCpf(): string {
+  return cpf.generate();
+}
