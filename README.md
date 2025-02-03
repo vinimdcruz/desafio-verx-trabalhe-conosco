@@ -1,71 +1,52 @@
-#Brain Agriculture
+# 🧠 Brain Agriculture
 
-Projeto de desafio técnico
+Este é um projeto desenvolvido como parte de um desafio técnico. Ele fornece uma API para gerenciamento de agricultores, utilizando tecnologias modernas para escalabilidade, confiabilidade e facilidade de manutenção.
 
-## Ferramentas
+## 🚀 Tecnologias Utilizadas
 
-- NestJS
-- Docker
-- Postgres
-- TypeORM
-- Jest
-- Swagger
+- **[NestJS](https://nestjs.com/)** – Framework para construção de APIs escaláveis em Node.js
+- **[Docker](https://www.docker.com/)** – Containerização para um ambiente de desenvolvimento consistente
+- **[PostgreSQL](https://www.postgresql.org/)** – Banco de dados relacional robusto e escalável
+- **[TypeORM](https://typeorm.io/)** – ORM para modelagem e comunicação com o banco de dados
+- **[Jest](https://jestjs.io/)** – Testes automatizados para garantir confiabilidade do código
+- **[Swagger](https://swagger.io/)** – Documentação interativa da API
 
-## Diagrama de arquitetura
+## 📌 Arquitetura
+
+A estrutura do projeto segue boas práticas de design de software, com separação de responsabilidades e modularização para facilitar a escalabilidade.
+
+### Diagrama de Arquitetura
 
 ![Diagrama de arquitetura](docs/brain-agriculture-architecture.png)
 
-## Configuração do ambiente
+## 🛠️ Configuração do Ambiente
 
-Recomendo utilizar o Docker para rodar o projeto, mas você também pode rodar localmente.
+A aplicação utiliza **Docker** para facilitar a configuração do ambiente e garantir consistência no desenvolvimento.
 
-### Rodando com Docker
+### Requisitos
 
-```bash
-$ docker compose up --build
-```
+Antes de começar, certifique-se de ter instalado:
 
-Obs: Após o build inicial, utilize apenas a flag -d para subir o projeto, sem o parâmetro "--build".
-exemplo: `docker compose up -d`
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
+### Executando a Aplicação
 
-```bash
-$ pnpm install
-```
-
-## Compilar e rodar o projeto
+Na raiz do projeto, execute:
 
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+docker compose up --build
 ```
 
-## Testes
+Isso criará e iniciará os containers do banco de dados (PostgreSQL) e da aplicação (NestJS).
 
-```bash
-# unit tests
-$ pnpm run test
+📖 Acessando a Documentação da API
+Após subir os containers, a API estará disponível em:
 
-# e2e tests
-$ pnpm run test:e2e
+📌 Swagger UI: http://localhost:3000/api
 
-# test coverage
-$ pnpm run test:cov
-```
+🧪 Testes
 
-## Deploy
+O processo de autenticação e testes ainda será desenvolvido.
 
-Para realizar o deploy do projeto, utilize o Mau.
 
-```bash
-$ pnpm install -g mau
-$ mau deploy
-```
-
-Agora é só acessar o link gerado pelo Mau e visualizar o projeto e a documentação da API.
